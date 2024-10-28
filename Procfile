@@ -1,1 +1,1 @@
-web: flask init-db; gunicorn tierrasur:app
+web: gunicorn tierrasur:app
