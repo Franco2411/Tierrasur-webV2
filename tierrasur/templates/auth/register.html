@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Tierrasur S.A.</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/tierrasur.png') }}" alt="Tierrasur S.A. Logo" class="logo">
+        </div>
+        <form method="post" class="login-form" id="registerForm">
+          <input type="text" name="username" id="username" placeholder="Ingrese su usuario" required>
+          <input type="text" name="nomCompleto" id="nomCompleto" placeholder="Ingrese su nombre completo" required>
+          <input type="password" name="password" id="password" placeholder="Contraseña" required>
+          <input type="submit" value="Solicitar" class="login-button" id="btn_solicitar">
+      </form>
+      <button class="register-button"><a href="{{ url_for('auth.login') }}">Volver</a></button>
+        {% for message in get_flashed_messages() %}
+            <div class="flash">{{ message }}</div>
+        {% endfor %}
+        <footer>HDA54 Software | 2024</footer>
+    </div>
+</body>
+<script src="{{ url_for('static', filename='scripts_auth.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</html>

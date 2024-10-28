@@ -1,0 +1,39 @@
+<nav>
+  <ul>
+    {% if g.user %}
+      <li><span>{{ g.user['username'] }}</span>
+      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+    {% else %}
+      <li><a href="{{ url_for('auth.register') }}">Registrarse</a>
+      <li><a href="{{ url_for('auth.login') }}">Ingresar</a>
+    {% endif %}
+  </ul>
+</nav>
+
+
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <h1 class="title-inicios">Inicio de sesión</h1>
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='images/tierrasur.png') }}" alt="Tierrasur S.A. Logo" class="logo">
+    </div>
+    <form method="post" class="login-form">
+        <input type="email" name="email" id="email" placeholder="Ingrese su email" required>
+        <input type="password" name="password" id="password" placeholder="Contraseña" required>
+        <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+        <input type="submit" value="Iniciar sesión" class="login-button">
+    </form>
+    <button class="register-button"><a href="{{ url_for('auth.register') }}">Registrarse</a></button>
+</div>
+<footer>
+    <p>HDA54 Software | 2024</p>
+</footer>
+{% endblock %}

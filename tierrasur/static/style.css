@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-image: url('images/fondo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    margin: 0;
+}
+
+.login-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 100%;
+    max-width: 360px;
+    max-height: 550px; /* Ajuste específico para iPhone 13 Pro */
+    text-align: center;
+    margin: 20px; /* Añade margen para que no quede pegado a los bordes */
+}
+
+.logo-container h1 {
+    font-size: 24px;
+    color: #ffffff;
+    background-color: #20512d;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.logo-container img {
+    width: 100%;
+    padding: 10px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form input {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 18px; /* Aumenta el tamaño de la fuente */
+    width: 100%;
+    
+}
+
+.forgot-password {
+    font-size: 14px;
+    color: #555;
+    text-decoration: none;
+    margin-bottom: 20px;
+    display: block;
+    text-align: left;
+    font-style: italic;
+}
+
+.forgot-password:hover {
+    color:#20512d;
+    cursor: pointer;
+}
+
+.login-button, .register-button {
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: 18px; /* Aumenta el tamaño de la fuente */
+}
+
+.login-button {
+    background-color: #20512d;
+    color: white;
+    border: none;
+}
+
+.login-button:hover {
+    background-color: #183e21;
+}
+
+.register-button {
+    background-color: white;
+    color: #20512d;
+    border: 2px solid #20512d;
+}
+
+.register-button:hover {
+    background-color: #20512d;
+    color: white;
+}
+
+.register-button a {
+    color: #20512d;
+    text-decoration: none;
+}
+
+.register-button a:hover {
+    color: #fff;
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 14px; /* Aumenta el tamaño de la fuente para mayor visibilidad */
+    color: #999;
+    text-align: center;
+}
+
+.flash {
+    color: red;
+    border: red;
+}
+
+@media (max-width: 550px) {
+    .login-container {
+        padding: 20px;
+        max-width: 500px; /* Asegura que se vea bien en pantallas de iPhone 13 Pro */
+        margin: 20px;
+    }
+
+    .login-form input, .login-button, .register-button {
+        font-size: 18px; /* Tamaño de fuente adecuado para usabilidad en móvil */
+    }
+}
