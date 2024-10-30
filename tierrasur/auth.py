@@ -5,8 +5,15 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 from tierrasur.db import get_db
 from tierrasur.funciones_varias import envio_mail
+import logging
+import jwt
+from datetime import datetime, timedelta
+from flask import current_app
+
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
+
+logging.basicConfig(level=logging.DEBUG)
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
@@ -79,28 +86,32 @@ def save_request():
 
 @bp.route('/login', methods=['GET','POST'])
 def login():
-    if request.method == 'POST':
-        password = request.form['password']
-        nombre = request.form['usuario']
+    respJson = request.get_json()
+    usuario = respJson.get('usuario')
+    contra = respJson.get('contra')
 
-        db, c = get_db()
-        error = None
-        c.execute(
-            'select * from usuarios where nick = %s', (nombre,)
-        )
-        user = c.fetchone()
-        if user is None:
-            error = 'Usuario no encontrado'
-        elif password != user['pass']:
-            error = 'Usuario y/o contraseña incorrectos'
+    db, c = get_db()
+    c.execute(
+        'select * from usuarios where nick = %s', (usuario,)
+    )
+    respUsu = c.fetchone()
+    #logging.debug(f'Los datos del usuario son: {respUsu['nick']} y {respUsu['pass']}')
+    logging.debug(f'Los datos mandados por el usuario son: {usuario} y {contra}')
+
+    if not respUsu:
+        return jsonify({'success': False, 'error': 'El usuario {} no existe'.format(usuario)})
+    elif respUsu['pass'] != contra:
+        return jsonify({'success': False, 'error': 'El usuario y/o contraseña son incorrectos.'})
+    else:
+        rol = respUsu['rol_id']
+        token = jwt.encode({
+            'usuario': usuario,
+            'exp': datetime.now() + timedelta(hours=1)
+        }, current_app.config['TOKEN_KEY'], algorithm="HS256")
+        return jsonify({'success': True, 'message': 'Sesión iniciada con exito', 'rol': rol, 'token': token})
+
+
         
-        if error is None:
-            session.clear()
-            session['user_id'] = user['id']
-            return redirect(url_for('home.index'))
-        
-        flash(error)
-    return render_template('auth/login.html')
 
 
 @bp.route('/logout', methods=['POST', 'GET'])

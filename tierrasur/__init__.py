@@ -2,6 +2,7 @@ import os
 from flask import Flask
 from flask_cors import CORS
 
+
 def create_app():
     app = Flask(__name__)
 
@@ -13,7 +14,8 @@ def create_app():
         DATABASE_PASSWORD=os.environ.get('FLASK_DATABASE_PASSWORD'),
         DATABASE_USER=os.environ.get('FLASK_DATABASE_USER'),
         DATABASE=os.environ.get('FLASK_DATABASE'),
-        SG_KEY = os.environ.get('SG_KEY')
+        SG_KEY = os.environ.get('SG_KEY'),
+        TOKEN_KEY = os.environ.get('TOKEN_KEY')    
 
     )
 
