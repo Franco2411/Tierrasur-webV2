@@ -28,11 +28,12 @@ def index():
 def save_data():
     db, c = get_db()
     data = request.get_json()
+    logging.debug(data)
 
     try:
         fecha1 = datetime.now()
         fecha = fecha1 - timedelta(hours=3)
-        usuario = g.user['nick']
+        usuario = data['usuario']
         campa = anio_campania()
 
         # Inserto la orden

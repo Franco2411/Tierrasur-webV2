@@ -104,11 +104,12 @@ def login():
         return jsonify({'success': False, 'error': 'El usuario y/o contraseña son incorrectos.'})
     else:
         rol = respUsu['rol_id']
+        usu = respUsu['nick']
         token = jwt.encode({
             'usuario': usuario,
             'exp': datetime.now() + timedelta(hours=1)
         }, current_app.config['TOKEN_KEY'], algorithm="HS256")
-        return jsonify({'success': True, 'message': 'Sesión iniciada con exito', 'rol': rol, 'token': token})
+        return jsonify({'success': True, 'message': 'Sesión iniciada con exito', 'rol': rol, 'token': token, 'usuario': usu})
 
 
         
